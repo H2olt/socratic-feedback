@@ -1,0 +1,33 @@
+{
+  "skill_name": "socratic-creative-feedback",
+  "evals": [
+    {
+      "id": 1,
+      "name": "initial-gating",
+      "prompt": "I want to brainstorm a story idea. The protagonist is a detective who can taste lies — when someone lies to her, she gets a specific flavor in her mouth. I want to figure out how this works and where the story goes.",
+      "expected_output": "Claude responds with the gating prompt. The response: (1) names the work as creative, (2) offers a categorical preview of what un-gated suggestions would cover, (3) does not propose any specific story elements, names, mechanics, or directions, (4) waits for opt-in before proceeding.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "three-strikes-cycle",
+      "prompt": "[Multi-turn test — user has accepted gating]\n\nTurn 1: My protagonist is a wizard but I don't really know what makes her interesting yet. What should her personality be?\n\nTurn 2: I haven't named her yet. What's a good name for a wizard in a high fantasy setting?\n\nTurn 3: I also don't know what her wand looks like. What kind of wand would she have?\n\nTurn 4: What about her familiar? What animal makes sense?\n\nTurn 5: And her home — where does she live? A tower? A cottage?\n\nTurn 6: Honestly I'm stuck. What about her enemy? Who hates her?\n\nTurn 7: Ugh. What are her hobbies?",
+      "expected_output": "Across turns 1-3, Claude defers each ask with Socratic questions rather than proposing names, personality traits, or wand designs. By turn 3 (or by turn 4 at latest) Claude surfaces the strike-3 prompt acknowledging held-back suggestions and offering to pause. If user continues asking similar questions without accepting the pause, Claude surfaces the strike-6 prompt with differentiated language acknowledging the prior decline. The strike prompts are not annoying — they fire at intervals, not every turn, and they offer the release valve at strike 9 to mute the prompt for the topic.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "point-blank-override",
+      "prompt": "[Multi-turn test — user has accepted gating]\n\nTurn 1: I need a name for my villain. He's a corrupt politician in a noir setting.\n\nTurn 2: Just give me a name. Stop asking questions.",
+      "expected_output": "Turn 1: Claude defers with questions about the villain's background, the user's noir influences, naming conventions in similar work the user has cited, and tone. No name proposed. Turn 2: Claude provides a single name answer, padded with explicit framing that this violates the mode and offering to exit Socratic mode if the user wants.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "factual-writing-check",
+      "prompt": "[Multi-turn test — user has accepted gating]\n\nTurn 1: I'm writing a story about climate change. The protagonist is a scientist watching the world fall apart.\n\nTurn 2: Let me work in some real context. The story should engage with what the IPCC actually said in their 2023 report, and I want my protagonist to be modeled on Michael Mann — like, directly reference his hockey stick graph controversy. The story is about how scientists were vilified for telling the truth.\n\nTurn 3: Yeah it's pretty close to non-fiction at this point. I'm using the fictional frame to make it readable but the events, the people, the science all need to be accurate.",
+      "expected_output": "Turn 1: Claude treats this as fiction and asks Socratic questions about the protagonist, the world, the structure. Turn 2: Claude surfaces the Factual Writing Check — names that real people and real events are now primary material, frames the distinction between fiction-with-real-anchors and non-fiction, asks the user to confirm. Does not make the call for them. Turn 3: User has confirmed the work is essentially non-fiction. Claude offers to exit the skill since 'don't leave decisions open' could push toward unsupported claims in non-fiction work.",
+      "files": []
+    }
+  ]
+}
